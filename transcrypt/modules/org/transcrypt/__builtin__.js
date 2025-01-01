@@ -1137,16 +1137,26 @@ Array.prototype.py_sort = function () {
     // __sort__ is def'ed with the Transcrypt kwargs mechanism
 };
 
-Array.prototype.__add__ = function (aList) {
-    return list (this.concat (aList));
+Array.prototype.__add__ = function (other) {
+    if (typeof other == 'object' && '__radd__' in other) {
+        return other.__radd__ (this);
+    }
+    else {
+    return list (this.concat (other));
+    }
 };
 
-Array.prototype.__mul__ = function (scalar) {
+Array.prototype.__mul__ = function (other) {
+    if (typeof other == 'object' && '__rmul__' in other) {
+        return other.__rmul__ (this);
+    }
+    else {
     let result = this;
-    for (let i = 1; i < scalar; i++) {
+    for (let i = 1; i < other; i++) {
         result = result.concat (this);
     }
     return result;
+    }
 };
 
 Array.prototype.__rmul__ = Array.prototype.__mul__;
