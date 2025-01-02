@@ -1142,7 +1142,7 @@ Array.prototype.__add__ = function (other) {
         return other.__radd__ (this);
     }
     else {
-    return list (this.concat (other));
+        return list (this.concat (other));
     }
 };
 
@@ -1151,11 +1151,11 @@ Array.prototype.__mul__ = function (other) {
         return other.__rmul__ (this);
     }
     else {
-    let result = this;
-    for (let i = 1; i < other; i++) {
-        result = result.concat (this);
-    }
-    return result;
+        let result = this;
+        for (let i = 1; i < other; i++) {
+            result = result.concat (this);
+        }
+        return result;
     }
 };
 
