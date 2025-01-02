@@ -1138,24 +1138,30 @@ Array.prototype.py_sort = function () {
 };
 
 Array.prototype.__add__ = function (other) {
-    if (typeof other == 'object' && '__radd__' in other) {
+    if (other.__class__ == this.__class__) {
+        return list (this.concat (other));
+    }
+    else if (typeof other == 'object' && '__radd__' in other) {
         return other.__radd__ (this);
     }
     else {
-        return list (this.concat (other));
+        throw py_TypeError ('unsupported operand type');
     }
 };
 
 Array.prototype.__mul__ = function (other) {
-    if (typeof other == 'object' && '__rmul__' in other) {
-        return other.__rmul__ (this);
-    }
-    else {
+    if (typeof other == 'number') {
         let result = this;
         for (let i = 1; i < other; i++) {
             result = result.concat (this);
         }
         return result;
+    }
+    else if (typeof other == 'object' && '__rmul__' in other) {
+        return other.__rmul__ (this);
+    }
+    else {
+        throw py_TypeError ('unsupported operand type');
     }
 };
 
