@@ -2320,6 +2320,21 @@ export function __idiv__ (a, b) {
     }
 };
 
+export function __ifloordiv__ (a, b) {
+    if (typeof a == 'object' && '__ifloordiv__' in a) {
+        return a.__ifloordiv__ (b);
+    }
+    else if (typeof a == 'object' && '__floordiv__' in a) {
+        return a = a.__floordiv__ (b);
+    }
+    else if (typeof b == 'object' && '__rfloordiv__' in b) {
+        return a = b.__rfloordiv__ (a);
+    }
+    else {
+        return a = Math.floor (a / b);
+    }
+};
+
 export function __iadd__ (a, b) {
     if (typeof a == 'object' && '__iadd__' in a) {
         return a.__iadd__ (b);

@@ -1255,6 +1255,7 @@ class Generator (ast.NodeVisitor):
                 # Overloaded arithmetic
                 '__imul__' if type (node.op) == ast.Mult else
                 '__idiv__' if type (node.op) == ast.Div else
+                '__ifloordiv__' if type (node.op) == ast.FloorDiv else
                 '__iadd__' if type (node.op) == ast.Add else
                 '__isub__' if type (node.op) == ast.Sub else
 
